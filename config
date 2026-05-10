@@ -3,8 +3,8 @@
 ###############################################################################
 ## THEME — Tokyo Night Storm
 ###############################################################################
-set $thm_bg0    #24283b
 set $thm_bg1    #282d42
+set $thm_bg0    #24283b
 set $thm_bg4    #3a405e
 set $thm_fg     #a9b1d6
 set $thm_red    #F7768E
@@ -42,9 +42,10 @@ bindsym $mod+Shift+Return exec firefox
 bindsym $mod+Ctrl+Return  exec pcmanfm
 bindsym $mod+Shift+q      kill
 
-# Rofi launcher / window switcher
-bindsym $mod+d   exec --no-startup-id "rofi -theme solarized -show-icons -modi windowcd,window,drun -show drun"
-bindsym $mod+Tab exec --no-startup-id "rofi -theme solarized -show-icons -modi windowcd,window,drun -show window"
+# Wofi launcher / window switcher
+bindsym $mod+d   exec wofi --show drun --style=$HOME/.config/wofi/style.css
+# TODO: Doesnt work. swayr is an option, or custom python script
+bindsym $mod+Tab exec wofi --show window
 
 # Misc app bindings
 bindsym $mod+Ctrl+b   exec terminal -e 'bmenu'
@@ -55,10 +56,13 @@ bindsym $mod+F5       exec terminal -e 'mocp'
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 # Screenshots
-# TODO: Replace with opening shutter or similar
-# bindsym Print              exec --no-startup-id i3-scrot
-# bindsym $mod+Print         --release exec --no-startup-id i3-scrot -s
-# bindsym $mod+Shift+Print   --release exec --no-startup-id i3-scrot -sc
+# Pipe grim output directly into swappy for annotation
+bindsym Print       exec grim - | swappy -f -
+bindsym $mod+Print  exec grim -g "$(slurp)" - | swappy -f -
+# bindsym Print exec grim ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
+# bindsym $mod+Print exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
+# Screenshot selected region to clipboard
+bindsym $mod+Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
 # Misc
 bindsym $mod+Ctrl+x    --release exec --no-startup-id xkill
@@ -209,18 +213,19 @@ mode "$mode_move_workspace" {
 bindsym $mod+Shift+m mode "$mode_move_workspace"
 
 # --- System ---
-set $mode_system System: (l)ock (e)xit (u)ser (s)uspend (Shift+r)eboot (Shift+s)hutdown
-bindsym $mod+Shift+Escape mode "$mode_system"
-mode "$mode_system" {
-    bindsym l       exec swaylock -f -c 000000,          mode "default"
-    bindsym s       exec systemctl suspend,               mode "default"
-    bindsym e       exec swaymsg exit,                    mode "default"
-    bindsym Shift+r exec systemctl reboot,                mode "default"
-    bindsym Shift+s exec systemctl poweroff,              mode "default"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+Shift+Escape exec ~/.config/sway/scripts/system-menu/system-menu.py
+# set $mode_system System: (l)ock (e)xit (u)ser (s)uspend (Shift+r)eboot (Shift+s)hutdown
+# bindsym $mod+Shift+Escape mode "$mode_system"
+# mode "$mode_system" {
+#     bindsym l       exec swaylock -f -c 000000,          mode "default"
+#     bindsym s       exec systemctl suspend,               mode "default"
+#     bindsym e       exec swaymsg exit,                    mode "default"
+#     bindsym Shift+r exec systemctl reboot,                mode "default"
+#     bindsym Shift+s exec systemctl poweroff,              mode "default"
+#
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
 
 # --- Gaps ---
 set $mode_gaps       Gaps: (o)uter (i)nner
@@ -305,11 +310,13 @@ exec --no-startup-id nm-applet --indicator
 # Bluetooth
 exec --no-startup-id blueman-applet
 # Manage displays
-exec_always pkill kanshi; kanshi
+exec_always pkill kanshi -w; kanshi
+# exec_always systemctl --user restart kanshi
 workspace 1 output HDMI-A-1
 workspace 8 output DP-1
 # Set wallpaper
-exec_always pkill swaybg; swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
+# exec_always pkill swaybg; swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
+exec_always swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
 # Set keyboard options
 input * {
     xkb_layout us,se
@@ -319,10 +326,10 @@ input * {
 exec --no-startup-id wl-paste --watch cliphist store
 # Locking
 exec swayidle -w \
-    timeout 300 'swaylock -f -c 000000' \
+    timeout 300 'swaylock --effect-blur 7x5' \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f -c 000000'
+    before-sleep 'swaylock --effect-blur 7x5'
 # Pamac tray
 exec --no-startup-id pamac-tray
 
@@ -336,7 +343,7 @@ bindsym XF86AudioMute        exec pamixer -t
 ###############################################################################
 ## LOCK
 ###############################################################################
-bindsym $mod+Shift+9 exec --no-startup-id blurlock
+bindsym $mod+Shift+0 exec swaylock --screenshots --effect-blur 7x5 --fade-in 0.2
 
 ###############################################################################
 ## Sway MANAGEMENT
@@ -349,6 +356,7 @@ bindsym $mod+Shift+e exec "swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg 
 ## BAR
 ###############################################################################
 exec_always pkill waybar; waybar
+# exec_always pkill waybar; waybar
 bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
 
 ###############################################################################
