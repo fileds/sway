@@ -59,8 +59,6 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 # Pipe grim output directly into swappy for annotation
 bindsym Print       exec grim - | swappy -f -
 bindsym $mod+Print  exec grim -g "$(slurp)" - | swappy -f -
-# bindsym Print exec grim ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
-# bindsym $mod+Print exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
 # Screenshot selected region to clipboard
 bindsym $mod+Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
@@ -214,18 +212,6 @@ bindsym $mod+Shift+m mode "$mode_move_workspace"
 
 # --- System ---
 bindsym $mod+Shift+Escape exec ~/.config/sway/scripts/system-menu/system-menu.py
-# set $mode_system System: (l)ock (e)xit (u)ser (s)uspend (Shift+r)eboot (Shift+s)hutdown
-# bindsym $mod+Shift+Escape mode "$mode_system"
-# mode "$mode_system" {
-#     bindsym l       exec swaylock -f -c 000000,          mode "default"
-#     bindsym s       exec systemctl suspend,               mode "default"
-#     bindsym e       exec swaymsg exit,                    mode "default"
-#     bindsym Shift+r exec systemctl reboot,                mode "default"
-#     bindsym Shift+s exec systemctl poweroff,              mode "default"
-#
-#     bindsym Return mode "default"
-#     bindsym Escape mode "default"
-# }
 
 # --- Gaps ---
 set $mode_gaps       Gaps: (o)uter (i)nner
@@ -321,6 +307,11 @@ exec_always swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_
 input * {
     xkb_layout us,se
     xkb_options grp:alt_shift_toggle,ctrl:nocaps
+}
+# Set touchpad options
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
 }
 # Clipboard
 exec --no-startup-id wl-paste --watch cliphist store
