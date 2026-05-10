@@ -296,7 +296,8 @@ exec --no-startup-id nm-applet --indicator
 # Bluetooth
 exec --no-startup-id blueman-applet
 # Manage displays
-exec_always pkill kanshi -w; kanshi
+# exec_always pkill kanshi -w; kanshi
+exec kanshi
 # exec_always systemctl --user restart kanshi
 workspace 1 output HDMI-A-1
 workspace 8 output DP-1
@@ -346,7 +347,8 @@ bindsym $mod+Shift+e exec "swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg 
 ###############################################################################
 ## BAR
 ###############################################################################
-exec_always pkill waybar; waybar
+# exec_always pkill waybar -w; waybar
+exec waybar
 # exec_always pkill waybar; waybar
 bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
 
