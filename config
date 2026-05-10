@@ -1,0 +1,363 @@
+# Sway config, adapted from i3 config file (v4)
+
+###############################################################################
+## THEME — Tokyo Night Storm
+###############################################################################
+set $thm_bg0    #24283b
+set $thm_bg1    #282d42
+set $thm_bg4    #3a405e
+set $thm_fg     #a9b1d6
+set $thm_red    #F7768E
+set $thm_orange #FF9E64
+set $thm_yellow #E0AF68
+set $thm_green  #9ECE6A
+set $thm_blue   #7AA2F7
+set $thm_purple #ad8ee6
+set $thm_grey   #453B6A
+
+###############################################################################
+## CORE
+###############################################################################
+set $mod Mod4
+
+default_border pixel 4
+default_floating_border pixel
+hide_edge_borders none
+
+# font xft:URWGothic-Book 8
+font xft:JetBrains Mono 10
+
+floating_modifier $mod
+
+# Border toggles
+bindsym $mod+u border none
+bindsym $mod+y border pixel 4
+bindsym $mod+n border normal 1
+
+###############################################################################
+## APPLICATIONS
+###############################################################################
+bindsym $mod+Return       exec alacritty
+bindsym $mod+Shift+Return exec firefox
+bindsym $mod+Ctrl+Return  exec pcmanfm
+bindsym $mod+Shift+q      kill
+
+# Rofi launcher / window switcher
+bindsym $mod+d   exec --no-startup-id "rofi -theme solarized -show-icons -modi windowcd,window,drun -show drun"
+bindsym $mod+Tab exec --no-startup-id "rofi -theme solarized -show-icons -modi windowcd,window,drun -show window"
+
+# Misc app bindings
+bindsym $mod+Ctrl+b   exec terminal -e 'bmenu'
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F5       exec terminal -e 'mocp'
+
+# Notifications
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+
+# Screenshots
+# TODO: Replace with opening shutter or similar
+# bindsym Print              exec --no-startup-id i3-scrot
+# bindsym $mod+Print         --release exec --no-startup-id i3-scrot -s
+# bindsym $mod+Shift+Print   --release exec --no-startup-id i3-scrot -sc
+
+# Misc
+bindsym $mod+Ctrl+x    --release exec --no-startup-id xkill
+
+###############################################################################
+## FOCUS & MOVEMENT
+###############################################################################
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+###############################################################################
+## WORKSPACES
+###############################################################################
+workspace_auto_back_and_forth yes
+bindsym $mod+b        workspace back_and_forth
+bindsym $mod+Shift+b  move container to workspace back_and_forth; workspace back_and_forth
+
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left  workspace prev
+bindsym $mod+Ctrl+l     workspace next
+bindsym $mod+Ctrl+h     workspace prev
+
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+
+# Switch
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move container (stay on current workspace)
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+# Move container (follow to workspace)
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+###############################################################################
+## LAYOUT
+###############################################################################
+bindsym $mod+q split toggle
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking;       exec notify-send 'layout stacking'
+bindsym $mod+w layout tabbed;         exec notify-send 'layout tabbed'
+bindsym $mod+e layout toggle split;   exec notify-send 'layout toggle'
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space       focus mode_toggle
+bindsym $mod+Shift+s     sticky toggle
+bindsym $mod+a           focus parent
+
+# Scratchpad
+bindsym $mod+minus       move scratchpad
+bindsym $mod+Shift+minus scratchpad show
+
+###############################################################################
+## MODES
+###############################################################################
+
+# --- Resize ---
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym h resize shrink width  5 px or 5 ppt
+    bindsym l resize grow width    5 px or 5 ppt
+    bindsym k resize grow height   5 px or 5 ppt
+    bindsym j resize shrink height 5 px or 5 ppt
+
+    bindsym Left  resize shrink width  1 px or 1 ppt
+    bindsym Right resize grow width    1 px or 1 ppt
+    bindsym Up    resize shrink height 1 px or 1 ppt
+    bindsym Down  resize grow height   1 px or 1 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# --- Move floating ---
+set $mode_move_floating Move floating: (hjkl/arrows) move, (Esc/Return) exit
+mode "$mode_move_floating" {
+    bindsym $mod+Tab focus right
+
+    bindsym h move left
+    bindsym j move down
+    bindsym k move up
+    bindsym l move right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$mode_move_floating" focus floating
+
+# --- Move workspace to monitor ---
+set $mode_move_workspace Move workspace: (h) left output, (l) right output, (Esc/Return) exit
+mode "$mode_move_workspace" {
+    bindsym h move workspace to output left,  mode "default"
+    bindsym l move workspace to output right, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m mode "$mode_move_workspace"
+
+# --- System ---
+set $mode_system System: (l)ock (e)xit (u)ser (s)uspend (Shift+r)eboot (Shift+s)hutdown
+bindsym $mod+Shift+Escape mode "$mode_system"
+mode "$mode_system" {
+    bindsym l       exec swaylock -f -c 000000,          mode "default"
+    bindsym s       exec systemctl suspend,               mode "default"
+    bindsym e       exec swaymsg exit,                    mode "default"
+    bindsym Shift+r exec systemctl reboot,                mode "default"
+    bindsym Shift+s exec systemctl poweroff,              mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# --- Gaps ---
+set $mode_gaps       Gaps: (o)uter (i)nner
+set $mode_gaps_outer Outer gaps: +|-|0  Shift=global
+set $mode_gaps_inner Inner gaps: +|-|0  Shift=global
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+    bindsym o      mode "$mode_gaps_outer"
+    bindsym i      mode "$mode_gaps_inner"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+    bindsym plus        gaps inner current plus 5
+    bindsym minus       gaps inner current minus 5
+    bindsym 0           gaps inner current set 0
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+    bindsym plus        gaps outer current plus 5
+    bindsym minus       gaps outer current minus 5
+    bindsym 0           gaps outer current set 0
+    bindsym Shift+plus  gaps outer all plus 5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     gaps outer all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+###############################################################################
+## Sway-GAPS
+###############################################################################
+gaps inner 6
+gaps outer 6
+smart_gaps on
+smart_borders on
+
+###############################################################################
+## FLOATING WINDOWS
+###############################################################################
+for_window [title="alsamixer"]                          floating enable border pixel 1
+for_window [class="calamares"]                          floating enable border normal
+for_window [class="Clipgrab"]                           floating enable
+for_window [title="File Transfer*"]                     floating enable
+for_window [class="fpakman"]                            floating enable
+for_window [class="Galculator"]                         floating enable border pixel 1
+for_window [class="GParted"]                            floating enable border normal
+for_window [class="Lightdm-settings"]                   floating enable
+for_window [class="Lxappearance"]                       floating enable sticky enable border normal
+for_window [class="Manjaro-hello"]                      floating enable
+for_window [class="Manjaro Settings Manager"]           floating enable border normal
+for_window [title="MuseScore: Play Panel"]              floating enable
+for_window [class="Nitrogen"]                           floating enable sticky enable border normal
+for_window [class="Oblogout"]                           fullscreen enable
+for_window [class="octopi"]                             floating enable
+for_window [title="About Pale Moon"]                    floating enable
+for_window [class="Pamac-manager"]                      floating enable
+for_window [class="Pavucontrol"]                        floating enable
+for_window [class="qt5ct"]                              floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"]                       floating enable sticky enable border normal
+for_window [class="Simple-scan"]                        floating enable border normal
+for_window [class="(?i)System-config-printer.py"]       floating enable border normal
+for_window [class="Skype"]                              floating enable border normal
+for_window [class="Timeset-gui"]                        floating enable border normal
+for_window [class="(?i)virtualbox"]                     floating enable border normal
+for_window [class="Xfburn"]                             floating enable
+for_window [class="[Ss]hutter"]                         floating enable
+for_window [urgent=latest]                              focus
+
+###############################################################################
+## AUTOSTART
+###############################################################################
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet --indicator
+# Bluetooth
+exec --no-startup-id blueman-applet
+# Manage displays
+exec_always pkill kanshi; kanshi
+workspace 1 output HDMI-A-1
+workspace 8 output DP-1
+# Set wallpaper
+exec_always pkill swaybg; swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
+# Set keyboard options
+input * {
+    xkb_layout us,se
+    xkb_options grp:alt_shift_toggle,ctrl:nocaps
+}
+# Clipboard
+exec --no-startup-id wl-paste --watch cliphist store
+# Locking
+exec swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -f -c 000000'
+# Pamac tray
+exec --no-startup-id pamac-tray
+
+###############################################################################
+## VOLUME
+###############################################################################
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioMute        exec pamixer -t
+
+###############################################################################
+## LOCK
+###############################################################################
+bindsym $mod+Shift+9 exec --no-startup-id blurlock
+
+###############################################################################
+## Sway MANAGEMENT
+###############################################################################
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+c restart
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg exit'"
+
+###############################################################################
+## BAR
+###############################################################################
+exec_always pkill waybar; waybar
+bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
+
+###############################################################################
+## CLIENT COLORS
+###############################################################################
+# class                 border      background  text      indicator   child_border
+client.focused          $thm_bg4    $thm_bg1    $thm_fg   $thm_purple $thm_blue
+client.focused_inactive $thm_bg1    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg4
+client.unfocused        $thm_bg0    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg0
+client.urgent           $thm_red    $thm_bg1    $thm_fg   $thm_red    $thm_red
+client.placeholder      $thm_bg0    $thm_bg0    $thm_fg   $thm_bg0    $thm_bg0
+client.background       $thm_bg0
