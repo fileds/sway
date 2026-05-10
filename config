@@ -326,12 +326,12 @@ input * {
 exec --no-startup-id wl-paste --watch cliphist store
 # Locking
 exec swayidle -w \
-    timeout 300 'swaylock --effect-blur 7x5' \
+    timeout 300 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2' \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock --effect-blur 7x5'
 # Pamac tray
-exec --no-startup-id pamac-tray
+# exec --no-startup-id pamac-tray
 
 ###############################################################################
 ## VOLUME
