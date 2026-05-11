@@ -297,10 +297,9 @@ exec --no-startup-id nm-applet --indicator
 exec --no-startup-id blueman-applet
 # Manage displays
 exec_always "pkill kanshi -w; kanshi"
-# exec kanshi
-# exec_always systemctl --user restart kanshi
-workspace 1 output HDMI-A-1
-workspace 8 output DP-1
+# TODO: Move to local.conf
+# workspace 1 output HDMI-A-1
+# workspace 8 output DP-1
 # Set wallpaper
 # exec_always pkill swaybg; swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
 exec_always swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
@@ -347,8 +346,7 @@ bindsym $mod+Shift+e exec "swaynag -t warning -m 'Exit sway?' -b 'Yes' 'swaymsg 
 ###############################################################################
 ## BAR
 ###############################################################################
-# exec_always pkill waybar -w; waybar
-exec waybar
+exec_always "pkill waybar; waybar"
 # exec_always pkill waybar; waybar
 bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
 
@@ -362,3 +360,8 @@ client.unfocused        $thm_bg0    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg0
 client.urgent           $thm_red    $thm_bg1    $thm_fg   $thm_red    $thm_red
 client.placeholder      $thm_bg0    $thm_bg0    $thm_fg   $thm_bg0    $thm_bg0
 client.background       $thm_bg0
+
+###############################################################################
+## LOCAL CONFIGS
+###############################################################################
+include ~/.config/sway/config.local

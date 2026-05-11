@@ -1,0 +1,56 @@
+/* Tokyo Night Storm */
+@define-color bg0    #24283b;
+@define-color bg1    #282d42;
+@define-color bg4    #3a405e;
+@define-color fg     #a9b1d6;
+@define-color red    #F7768E;
+@define-color orange #FF9E64;
+@define-color yellow #E0AF68;
+@define-color green  #9ECE6A;
+@define-color blue   #7AA2F7;
+@define-color purple #ad8ee6;
+@define-color grey   #453B6A;
+
+window {
+    background-color: @bg0;
+    border: 1px solid @bg4;
+    border-radius: 0px;
+}
+
+#title {
+    color: @fg;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+#hint {
+    color: @fg;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+button {
+    background: @bg1;
+    color: @fg;
+    border: 1px solid @bg4;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 12px;
+    transition: all 120ms ease;
+}
+
+button:hover  { border-color: @fg; background: @bg4; }
+button:active { background: @bg0; }
+
+#btn-lock,    #btn-lock:hover     { color: @blue;   border-color: @blue;   }
+#btn-suspend, #btn-suspend:hover  { color: @blue;   border-color: @blue;   }
+#btn-exit,    #btn-exit:hover     { color: @orange; border-color: @orange; }
+#btn-reboot,  #btn-reboot:hover   { color: @orange; border-color: @orange; }
+#btn-shutdown,#btn-shutdown:hover { color: @red;    border-color: @red;    }
+
+#btn-lock:hover     { background: alpha(@blue,   0.15); }
+#btn-suspend:hover  { background: alpha(@blue,   0.15); }
+#btn-exit:hover     { background: alpha(@orange, 0.15); }
+#btn-reboot:hover   { background: alpha(@orange, 0.15); }
+#btn-shutdown:hover { background: alpha(@red,    0.15); }
