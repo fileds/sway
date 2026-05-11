@@ -296,8 +296,8 @@ exec --no-startup-id nm-applet --indicator
 # Bluetooth
 exec --no-startup-id blueman-applet
 # Manage displays
-# exec_always pkill kanshi -w; kanshi
-exec kanshi
+exec_always "pkill kanshi -w; kanshi"
+# exec kanshi
 # exec_always systemctl --user restart kanshi
 workspace 1 output HDMI-A-1
 workspace 8 output DP-1
