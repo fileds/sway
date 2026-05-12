@@ -297,21 +297,12 @@ exec --no-startup-id nm-applet --indicator
 exec --no-startup-id blueman-applet
 # Manage displays
 exec_always "pkill kanshi -w; kanshi"
-# TODO: Move to local.conf
-# workspace 1 output HDMI-A-1
-# workspace 8 output DP-1
 # Set wallpaper
-# exec_always pkill swaybg; swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
 exec_always swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
 # Set keyboard options
 input * {
     xkb_layout us,se
     xkb_options grp:alt_shift_toggle,ctrl:nocaps
-}
-# Set touchpad options
-input type:touchpad {
-    tap enabled
-    natural_scroll enabled
 }
 # Clipboard
 exec --no-startup-id wl-paste --watch cliphist store
