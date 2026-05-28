@@ -346,7 +346,7 @@ bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
 ###############################################################################
 # class                 border      background  text      indicator   child_border
 client.focused          $thm_bg4    $thm_bg1    $thm_fg   $thm_purple $thm_blue
-client.focused_inactive $thm_bg1    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg4
+client.focused_inactive $thm_bg4    $thm_bg0    $thm_fg   $thm_bg4    $thm_purple
 client.unfocused        $thm_bg0    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg0
 client.urgent           $thm_red    $thm_bg1    $thm_fg   $thm_red    $thm_red
 client.placeholder      $thm_bg0    $thm_bg0    $thm_fg   $thm_bg0    $thm_bg0
