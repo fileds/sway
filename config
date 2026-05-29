@@ -161,19 +161,13 @@ bindsym $mod+Shift+minus scratchpad show
 ###############################################################################
 ## MODES
 ###############################################################################
-
 # --- Resize ---
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resize (h) +width, (l) -width, (k) -height, (j) +height"
 mode "resize" {
-    bindsym h resize shrink width  5 px or 5 ppt
-    bindsym l resize grow width    5 px or 5 ppt
-    bindsym k resize grow height   5 px or 5 ppt
-    bindsym j resize shrink height 5 px or 5 ppt
-
-    bindsym Left  resize shrink width  1 px or 1 ppt
-    bindsym Right resize grow width    1 px or 1 ppt
-    bindsym Up    resize shrink height 1 px or 1 ppt
-    bindsym Down  resize grow height   1 px or 1 ppt
+    bindsym l resize shrink width  5 px or 5 ppt
+    bindsym h resize grow width    5 px or 5 ppt
+    bindsym j resize grow height   5 px or 5 ppt
+    bindsym k resize shrink height 5 px or 5 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -200,9 +194,11 @@ mode "$mode_move_floating" {
 bindsym $mod+m mode "$mode_move_floating" focus floating
 
 # --- Move workspace to monitor ---
-set $mode_move_workspace Move workspace: (h) left output, (l) right output, (Esc/Return) exit
+set $mode_move_workspace Move workspace: (hjkl) move, (Esc/Return) exit
 mode "$mode_move_workspace" {
     bindsym h move workspace to output left,  mode "default"
+    bindsym j move workspace to output down,  mode "default"
+    bindsym k move workspace to output up,  mode "default"
     bindsym l move workspace to output right, mode "default"
 
     bindsym Return mode "default"
@@ -302,7 +298,7 @@ exec_always swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_
 # Set keyboard options
 input * {
     xkb_layout us,se
-    xkb_options grp:win_space_toggle,ctrl:nocaps
+    xkb_options grp:alt_shift_toggle,ctrl:nocaps
 }
 # Clipboard
 exec --no-startup-id wl-paste --watch cliphist store
