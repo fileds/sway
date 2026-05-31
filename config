@@ -162,8 +162,8 @@ bindsym $mod+Shift+minus scratchpad show
 ## MODES
 ###############################################################################
 # --- Resize ---
-bindsym $mod+r mode "resize (h) +width, (l) -width, (k) -height, (j) +height"
-mode "resize" {
+set $mode_resize Resize (h) +width, (l) -width, (k) -height, (j) +height
+mode "$mode_resize" {
     bindsym l resize shrink width  5 px or 5 ppt
     bindsym h resize grow width    5 px or 5 ppt
     bindsym j resize grow height   5 px or 5 ppt
@@ -172,6 +172,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+bindsym $mod+r mode "$mode_resize"
 
 # --- Move floating ---
 set $mode_move_floating Move floating: (hjkl/arrows) move, (Esc/Return) exit
@@ -341,8 +342,8 @@ bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
 ## CLIENT COLORS
 ###############################################################################
 # class                 border      background  text      indicator   child_border
-client.focused          $thm_bg4    $thm_bg1    $thm_fg   $thm_purple $thm_blue
-client.focused_inactive $thm_bg4    $thm_bg0    $thm_fg   $thm_bg4    $thm_purple
+client.focused          $thm_bg4    $thm_bg1    $thm_fg   $thm_blue   $thm_blue
+client.focused_inactive $thm_bg4    $thm_bg0    $thm_fg   $thm_purple $thm_purple
 client.unfocused        $thm_bg0    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg0
 client.urgent           $thm_red    $thm_bg1    $thm_fg   $thm_red    $thm_red
 client.placeholder      $thm_bg0    $thm_bg0    $thm_fg   $thm_bg0    $thm_bg0
