@@ -24,18 +24,19 @@ Gtk.StyleContext.add_provider_for_screen(
 # Actions
 # ---------------------------------------------------------------------------
 def run(cmd):
-    subprocess.Popen(cmd, shell=True)
     Gtk.main_quit()
+    subprocess.run(cmd, shell=True)
 
 
-LOCK = 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
+# Handled by swayidle
+# LOCK = 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
 
 
 def on_key(_widget, event):
     match Gdk.keyval_name(event.keyval):
         case 'l': run(LOCK)
         case 'e': run('swaymsg exit')
-        case 's': run(f'{LOCK}; systemctl suspend')
+        case 's': run('systemctl suspend')
         case 'R': run('systemctl reboot')
         case 'S': run('systemctl poweroff')
         case 'Escape' | 'Return': Gtk.main_quit()
