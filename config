@@ -35,6 +35,12 @@ bindsym $mod+y border pixel 4
 bindsym $mod+n border normal 1
 
 ###############################################################################
+## ENVIRONMENT VARIABLES
+###############################################################################
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+###############################################################################
 ## APPLICATIONS
 ###############################################################################
 bindsym $mod+Return       exec alacritty
