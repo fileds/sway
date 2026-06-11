@@ -29,7 +29,7 @@ def run(cmd):
 
 
 # Handled by swayidle
-# LOCK = 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
+LOCK = 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
 
 
 def on_key(_widget, event):
@@ -37,6 +37,7 @@ def on_key(_widget, event):
         case 'l': run(LOCK)
         case 'e': run('swaymsg exit')
         case 's': run('systemctl suspend')
+        case 'H': run('systemctl hibernate')
         case 'R': run('systemctl reboot')
         case 'S': run('systemctl poweroff')
         case 'Escape' | 'Return': Gtk.main_quit()
@@ -69,11 +70,12 @@ hbox = Gtk.Box(spacing=8)
 vbox.pack_start(hbox, False, False, 0)
 
 buttons = [
-    ('btn-lock',     '(l)ock',           'swaylock -f -c 000000'),
-    ('btn-suspend',  '(s)uspend',        'systemctl suspend'),
-    ('btn-exit',     '(e)xit',           'swaymsg exit'),
-    ('btn-reboot',   'Shift+(R)eboot',   'systemctl reboot'),
-    ('btn-shutdown', 'Shift+(S)hutdown', 'systemctl poweroff'),
+    ('btn-lock',        '(l)ock',              'swaylock -f -c 000000'),
+    ('btn-suspend',     '(s)uspend',           'systemctl suspend'),
+    ('btn-exit',        '(e)xit',              'swaymsg exit'),
+    ('btn-hibernate',   'Shift+(h)ibernate',   'systemctl hibernate'),
+    ('btn-reboot',      'Shift+(r)eboot',      'systemctl reboot'),
+    ('btn-shutdown',    'Shift+(s)hutdown',    'systemctl poweroff'),
 ]
 
 for widget_id, label, cmd in buttons:

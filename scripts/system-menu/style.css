@@ -43,14 +43,16 @@ button {
 button:hover  { border-color: @fg; background: @bg4; }
 button:active { background: @bg0; }
 
-#btn-lock,    #btn-lock:hover     { color: @blue;   border-color: @blue;   }
-#btn-suspend, #btn-suspend:hover  { color: @blue;   border-color: @blue;   }
-#btn-exit,    #btn-exit:hover     { color: @orange; border-color: @orange; }
-#btn-reboot,  #btn-reboot:hover   { color: @orange; border-color: @orange; }
-#btn-shutdown,#btn-shutdown:hover { color: @red;    border-color: @red;    }
+#btn-lock,       #btn-lock:hover        { color: @blue;   border-color: @blue;   }
+#btn-suspend,    #btn-suspend:hover     { color: @blue;   border-color: @blue;   }
+#btn-exit,       #btn-exit:hover        { color: @orange; border-color: @orange; }
+#btn-hibernate,  #btn-hibernate:hover   { color: @blue; border-color: @blue; }
+#btn-reboot,     #btn-reboot:hover         { color: @orange; border-color: @orange; }
+#btn-shutdown,   #btn-shutdown:hover       { color: @red;    border-color: @red;    }
 
-#btn-lock:hover     { background: alpha(@blue,   0.15); }
-#btn-suspend:hover  { background: alpha(@blue,   0.15); }
-#btn-exit:hover     { background: alpha(@orange, 0.15); }
-#btn-reboot:hover   { background: alpha(@orange, 0.15); }
-#btn-shutdown:hover { background: alpha(@red,    0.15); }
+#btn-lock:hover       { background: alpha(@blue,   0.15); }
+#btn-suspend:hover    { background: alpha(@blue,   0.15); }
+#btn-exit:hover       { background: alpha(@orange, 0.15); }
+#btn-hibernate:hover  { background: alpha(@blue,   0.15); }
+#btn-reboot:hover     { background: alpha(@orange, 0.15); }
+#btn-shutdown:hover   { background: alpha(@red,    0.15); }

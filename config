@@ -59,7 +59,7 @@ bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5       exec terminal -e 'mocp'
 
 # Notifications
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+# bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 
 # Screenshots
 # Pipe grim output directly into swappy for annotation
@@ -215,6 +215,7 @@ bindsym $mod+Shift+m mode "$mode_move_workspace"
 
 # --- System ---
 bindsym $mod+Shift+Escape exec ~/.config/sway/scripts/system-menu/system-menu.py
+bindsym $mod+Shift+0 exec ~/.config/sway/scripts/system-menu/system-menu.py
 
 # --- Gaps ---
 set $mode_gaps       Gaps: (o)uter (i)nner
@@ -326,11 +327,6 @@ bindsym XF86AudioLowerVolume exec pamixer -d 5
 bindsym XF86AudioMute        exec pamixer -t
 
 ###############################################################################
-## LOCK
-###############################################################################
-bindsym $mod+Shift+0 exec swaylock --screenshots --effect-blur 7x5 --fade-in 0.2
-
-###############################################################################
 ## Sway MANAGEMENT
 ###############################################################################
 bindsym $mod+Shift+r reload
@@ -348,10 +344,10 @@ bindsym $mod+Ctrl+m exec pkill -SIGUSR1 waybar
 ## CLIENT COLORS
 ###############################################################################
 # class                 border      background  text      indicator   child_border
-client.focused          $thm_bg4    $thm_bg1    $thm_fg   $thm_blue   $thm_blue
+client.focused          $thm_bg4    $thm_fg     $thm_bg1  $thm_blue   $thm_blue
 client.focused_inactive $thm_bg4    $thm_bg0    $thm_fg   $thm_purple $thm_purple
 client.unfocused        $thm_bg0    $thm_bg0    $thm_fg   $thm_bg4    $thm_bg0
-client.urgent           $thm_red    $thm_bg1    $thm_fg   $thm_red    $thm_red
+client.urgent           $thm_red    $thm_red    $thm_fg   $thm_red    $thm_red
 client.placeholder      $thm_bg0    $thm_bg0    $thm_fg   $thm_bg0    $thm_bg0
 client.background       $thm_bg0
 
