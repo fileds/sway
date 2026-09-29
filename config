@@ -303,6 +303,7 @@ exec --no-startup-id blueman-applet
 exec_always "pkill kanshi -w; kanshi"
 # Set wallpaper
 exec_always swaybg -o '*' -i /home/fileds/Pictures/wallpapers/Austria_by_Rutger_Heijmerikx.jpg -m fill
+# exec_always swaybg -o '*' -i /usr/share/backgrounds/fjall.jpeg
 # Set keyboard options
 input * {
     xkb_layout us,se
@@ -320,11 +321,18 @@ exec swayidle -w \
 # exec --no-startup-id pamac-tray
 
 ###############################################################################
-## VOLUME
+## Function buttons (XF86*)
 ###############################################################################
+# Volume
 bindsym XF86AudioRaiseVolume exec pamixer -i 5
 bindsym XF86AudioLowerVolume exec pamixer -d 5
 bindsym XF86AudioMute        exec pamixer -t
+
+# Brightness
+# bindsym XF86MonBrightnessUp   exec brightnessctl set +5% && notify-send -t 1000 "Brightness" "$(brightnessctl -m | cut -d, -f4)"
+# bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send -t 1000 "Brightness" "$(brightnessctl -m | cut -d, -f4)"
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 ###############################################################################
 ## Sway MANAGEMENT
