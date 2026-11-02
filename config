@@ -54,9 +54,7 @@ bindsym $mod+d   exec wofi --show drun --style=$HOME/.config/wofi/style.css
 bindsym $mod+Tab exec wofi --show window
 
 # Misc app bindings
-bindsym $mod+Ctrl+b   exec terminal -e 'bmenu'
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5       exec terminal -e 'mocp'
+bindsym $mod+F5       exec alacritty -e
 
 # Notifications
 # bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
@@ -69,7 +67,7 @@ bindsym $mod+P        exec grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+Shift+P  exec grim -g "$(slurp)" - | swappy -f -
 
 # Misc
-# bindsym $mod+Ctrl+x    --release exec --no-startup-id xkill
+# bindsym $mod+Ctrl+x    --release exec  xkill
 
 ###############################################################################
 ## FOCUS & MOVEMENT
@@ -159,7 +157,7 @@ bindsym $mod+e layout toggle split;   exec notify-send 'layout toggle'
 bindsym $mod+Shift+space floating toggle;   exec notify-send 'floating toggle'
 bindsym $mod+space       focus mode_toggle; exec notify-send 'mode toggle'
 bindsym $mod+Shift+s     sticky toggle;     exec notify-send 'sticky toggle'
-bindsym $mod+a           focus parent;      exec notify-send 'focud parent'
+bindsym $mod+a           focus parent;      exec notify-send 'focus parent'
 
 # Scratchpad
 bindsym $mod+minus       move scratchpad;      exec notify-send 'move scratchpad'
@@ -277,16 +275,13 @@ for_window [class="Manjaro-hello"]                      floating enable
 for_window [class="Manjaro Settings Manager"]           floating enable border normal
 for_window [title="MuseScore: Play Panel"]              floating enable
 for_window [class="Nitrogen"]                           floating enable sticky enable border normal
-for_window [class="Oblogout"]                           fullscreen enable
 for_window [class="octopi"]                             floating enable
-for_window [title="About Pale Moon"]                    floating enable
 for_window [class="Pamac-manager"]                      floating enable
 for_window [class="Pavucontrol"]                        floating enable
 for_window [class="qt5ct"]                              floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"]                       floating enable sticky enable border normal
 for_window [class="Simple-scan"]                        floating enable border normal
 for_window [class="(?i)System-config-printer.py"]       floating enable border normal
-for_window [class="Skype"]                              floating enable border normal
 for_window [class="Timeset-gui"]                        floating enable border normal
 for_window [class="(?i)virtualbox"]                     floating enable border normal
 for_window [class="Xfburn"]                             floating enable
@@ -296,10 +291,10 @@ for_window [urgent=latest]                              focus
 ###############################################################################
 ## AUTOSTART
 ###############################################################################
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nm-applet --indicator
+exec  /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec  nm-applet --indicator
 # Bluetooth
-exec --no-startup-id blueman-applet
+exec  blueman-applet
 # Manage displays
 exec_always "pkill kanshi -w; kanshi"
 # Set wallpaper
@@ -311,7 +306,7 @@ input * {
     xkb_options grp:alt_shift_toggle,ctrl:nocaps
 }
 # Clipboard
-exec --no-startup-id wl-paste --watch cliphist store
+exec  wl-paste --watch cliphist store
 # Locking
 # Check if swaylock is already running, and only execute if not
 set $lock 'pgrep -x swaylock || swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
@@ -322,7 +317,7 @@ exec swayidle -w \
     resume 'swaymsg "output * power on"' \
     before-sleep $lock
 # Pamac tray
-# exec --no-startup-id pamac-tray
+# exec  pamac-tray
 
 ###############################################################################
 ## Function buttons (XF86*)
