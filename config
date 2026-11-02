@@ -148,21 +148,22 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 ###############################################################################
 ## LAYOUT
 ###############################################################################
-bindsym $mod+q split toggle
-bindsym $mod+f fullscreen toggle
+bindsym $mod+q split toggle;      exec notify-send 'split toggle'
+bindsym $mod+v split toggle;      exec notify-send 'split toggle'
+bindsym $mod+f fullscreen toggle; exec notify-send 'fullscreen toggle'
 
 bindsym $mod+s layout stacking;       exec notify-send 'layout stacking'
 bindsym $mod+w layout tabbed;         exec notify-send 'layout tabbed'
 bindsym $mod+e layout toggle split;   exec notify-send 'layout toggle'
 
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space       focus mode_toggle
-bindsym $mod+Shift+s     sticky toggle
-bindsym $mod+a           focus parent
+bindsym $mod+Shift+space floating toggle;   exec notify-send 'floating toggle'
+bindsym $mod+space       focus mode_toggle; exec notify-send 'mode toggle'
+bindsym $mod+Shift+s     sticky toggle;     exec notify-send 'sticky toggle'
+bindsym $mod+a           focus parent;      exec notify-send 'focud parent'
 
 # Scratchpad
-bindsym $mod+minus       move scratchpad
-bindsym $mod+Shift+minus scratchpad show
+bindsym $mod+minus       move scratchpad;      exec notify-send 'move scratchpad'
+bindsym $mod+Shift+minus scratchpad show;      exec notify-send 'show scratchpad'
 
 ###############################################################################
 ## MODES
@@ -312,11 +313,14 @@ input * {
 # Clipboard
 exec --no-startup-id wl-paste --watch cliphist store
 # Locking
+# Check if swaylock is already running, and only execute if not
+set $lock 'pgrep -x swaylock || swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
+
 exec swayidle -w \
-    timeout 300 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2' \
+    timeout 300 $lock \
     timeout 600 'swaymsg "output * power off"' \
     resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock --screenshots --effect-blur 7x5 --fade-in 0.2'
+    before-sleep $lock
 # Pamac tray
 # exec --no-startup-id pamac-tray
 
